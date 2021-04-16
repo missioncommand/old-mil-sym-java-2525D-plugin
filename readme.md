@@ -1,4 +1,4 @@
-2525D prototype plugin for the SEC renderer. (RETIRED)
+2525D prototype plugin for the SEC renderer. (RETIRED)  
 Modifiers only work for ground units.
 Cyber Units aren't working properly as there is no cyber frame among the SVGs ESRI developed.
 No plans to continue this as the renderer and its ports are retired but I didn't want to lose the code so I'm posting it to GitHub.
