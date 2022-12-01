@@ -395,6 +395,170 @@ public class SymbolUtilitiesD {
         center = new Point2D.Double(centerX, centerY);
         return center;
     }
+
+
+    
+    /**
+     * 
+     * @param drawRule - Like DrawRules.CIRCULAR2
+     * @return int[] where the first index is the minimum required points and
+     * the next index is the maximum allowed points
+     */
+    public static int[] getMinMaxPointsFromDrawRule(int drawRule)
+    {
+        int[] points = {1,1};
+        
+        switch(drawRule)
+        {
+            case DrawRules.AREA1:
+            case DrawRules.AREA2:
+            case DrawRules.AREA3:
+            case DrawRules.AREA4:
+            case DrawRules.AREA9:
+            case DrawRules.AREA20:
+            case DrawRules.AREA23:
+                points[0] = 3;
+                points[1] = Integer.MAX_VALUE;
+                break;
+            case DrawRules.AREA5:
+            case DrawRules.AREA7:
+            case DrawRules.AREA11:
+            case DrawRules.AREA12:
+            case DrawRules.AREA17:
+            case DrawRules.AREA21:
+            case DrawRules.AREA24:
+            case DrawRules.AREA25:
+            case DrawRules.POINT12:
+            case DrawRules.LINE3:
+            case DrawRules.LINE6://doesn't seem to be used
+            case DrawRules.LINE10:
+            case DrawRules.LINE12:
+            case DrawRules.LINE17:
+            case DrawRules.LINE22:
+            case DrawRules.LINE23:
+            case DrawRules.LINE24:
+            case DrawRules.LINE27:
+            case DrawRules.LINE29://Ambush
+            case DrawRules.POLYLINE1:
+                points[0] = 3;
+                points[1] = 3;
+                break;
+            case DrawRules.AREA6:
+            case DrawRules.AREA13:
+            case DrawRules.AREA15:
+            case DrawRules.AREA16:
+            case DrawRules.AREA19:
+            case DrawRules.LINE4:
+            case DrawRules.LINE5:
+            case DrawRules.LINE9:
+            case DrawRules.LINE14:
+            case DrawRules.LINE15:
+            case DrawRules.LINE18:
+            case DrawRules.LINE19:
+            case DrawRules.LINE20:
+            case DrawRules.LINE25:
+            case DrawRules.LINE28:
+            case DrawRules.RECTANGULAR1://requires AM
+            case DrawRules.RECTANGULAR3://requires AM
+                points[0] = 2;
+                points[1] = 2;
+                break;
+            case DrawRules.AREA8:
+            case DrawRules.AREA18:
+            case DrawRules.LINE11:
+            case DrawRules.LINE16:
+                points[0] = 4;
+                points[1] = 4;
+                break;
+            case DrawRules.AREA10:
+                points[0] = 3;
+                points[1] = 6;
+                break;
+            case DrawRules.AREA14:
+            case DrawRules.LINE1:
+            case DrawRules.LINE2:
+            case DrawRules.LINE7:
+            case DrawRules.LINE13:
+            case DrawRules.LINE21:
+            case DrawRules.CORRIDOR1://Airspace Control Corridors
+                points[0] = 2;
+                points[1] = Integer.MAX_VALUE;
+                break;
+            case DrawRules.AREA26:
+            //Min 6, no Max but number of points has to be even
+                points[0] = 6;
+                points[1] = Integer.MAX_VALUE;
+                break;
+            case DrawRules.LINE8:
+                points[0] = 2;
+                points[1] = 300;
+                break;
+            case DrawRules.LINE26:
+                points[0] = 3;
+                points[1] = 4;
+                break;
+            case DrawRules.AXIS1:
+            case DrawRules.AXIS2:
+                points[0] = 3;
+                points[1] = 50;
+                break;
+            case 0://do not draw
+                points[0] = 0;
+                points[1] = 0;                
+                break;
+            //Rest are single points
+            case DrawRules.AREA22://Basic Defense Zone (BDZ) requires AM for radius
+            case DrawRules.POINT17://requires AM & AM1
+            case DrawRules.POINT18://requires AM & AN values
+            case DrawRules.ELLIPSE1://required AM, AM1, AN
+            case DrawRules.RECTANGULAR2://requires AM, AM1, AN
+            default:
+        }
+        
+        return points;
+    }
+    
+    public static int[] getMinMaxPointsFromMODrawRule(int drawRule)
+    {
+        int[] points = {1,1};
+        
+        switch(drawRule)
+        {
+            case MODrawRules.AREA1:
+            case MODrawRules.AREA2:
+                points[0]=3;
+                points[1]=Integer.MAX_VALUE;
+                break;
+            case MODrawRules.POINT5:
+                points[0]=2;
+                points[1]=2;
+                break;
+            case MODrawRules.LINE1:
+            case MODrawRules.LINE2:
+            case MODrawRules.LINE3:
+            case MODrawRules.LINE4:
+            case MODrawRules.LINE6:
+            case MODrawRules.LINE7:
+            case MODrawRules.LINE8:
+                points[0]=2;
+                points[1]=Integer.MAX_VALUE;
+                break;
+            case MODrawRules.LINE5:
+                points[0]=3;
+                points[1]=Integer.MAX_VALUE;
+                break;
+            case 0://do not draw
+                points[0] = 0;
+                points[1] = 0;                
+                break;
+            //Rest are single points
+            default:
+            
+        }
+        
+        return points;
+    }
+    
     // <editor-fold desc="hasModifier functions" defaultstate="collapsed">
     public static boolean hasModifier2(String symbolID, String modifier)
     {

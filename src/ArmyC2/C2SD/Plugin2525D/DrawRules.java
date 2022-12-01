@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ArmyC2.C2SD.Plugin2525D;
 
 /**
- *
+ * Draw Rules for Control Measures
  * @author Michael.Spinelli
  */
 public class DrawRules {

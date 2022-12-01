@@ -106,6 +106,158 @@ public class DrawCategory {
      * UNKNOWN.
      */
     static public final int UNKNOWN = 99;
+    
+    /**
+     * 
+     * @param symbolSet
+     * @param drawRule from DrawRules or MODrawRules
+     */
+    static public int getDrawCategoryFromRule(int symbolSet, int drawRule)
+    {
+        int dc = POINT;
+        
+        if(symbolSet == SymbolID.SymbolSet_ControlMeasure)
+        {
+            switch(drawRule)
+            {
+
+                case DrawRules.AREA1:
+                case DrawRules.AREA2:
+                case DrawRules.AREA3:
+                case DrawRules.AREA4:
+                case DrawRules.AREA9:
+                case DrawRules.AREA10:
+                case DrawRules.AREA20:
+                case DrawRules.AREA23:
+                case DrawRules.AREA26:
+                    dc = POLYGON;
+                    break;
+                case DrawRules.AREA5:
+                case DrawRules.AREA7:
+                case DrawRules.AREA8:
+                case DrawRules.AREA11:
+                case DrawRules.AREA12:
+                case DrawRules.AREA17:
+                case DrawRules.AREA18:
+                case DrawRules.AREA21:
+                case DrawRules.AREA24:
+                case DrawRules.AREA25:
+                case DrawRules.POINT12:
+                case DrawRules.LINE3:
+                case DrawRules.LINE10:
+                case DrawRules.LINE12:
+                case DrawRules.LINE17:
+                case DrawRules.LINE22:
+                case DrawRules.LINE23:
+                case DrawRules.LINE24:
+                case DrawRules.LINE27:
+                case DrawRules.LINE29://Ambush
+                case DrawRules.POLYLINE1://Infiltration Lane
+                case DrawRules.LINE15:
+                case DrawRules.LINE11://bridge or gap
+                case DrawRules.LINE16:
+                    dc = SUPERAUTOSHAPE;
+                    break;
+                case DrawRules.AREA6:
+                case DrawRules.AREA13:
+                case DrawRules.AREA14:
+                case DrawRules.AREA15:
+                case DrawRules.AREA16:
+                case DrawRules.AREA19:
+                case DrawRules.LINE6://doesn't seem to be used
+                case DrawRules.LINE4://?
+                case DrawRules.LINE19://Fighting Position?
+                case DrawRules.LINE26:
+                    dc = AUTOSHAPE;
+                    break;
+                case DrawRules.AREA22://Basic Defense Zone (BDZ) requires AM for radius
+                case DrawRules.ELLIPSE1://required AM, AM1, AN
+                case DrawRules.CIRCULAR1://required AM, AM1, AN
+                    dc = CIRCULAR_PARAMETERED_AUTOSHAPE;
+                    break;
+                case DrawRules.CIRCULAR2:
+                    dc = CIRCULAR_RANGEFAN_AUTOSHAPE;
+                    break;
+                case DrawRules.LINE9:
+                case DrawRules.LINE20:
+                case DrawRules.LINE25:             
+                case DrawRules.LINE28:
+                    dc = TWOPOINTARROW;
+                    break;
+                case DrawRules.LINE1:
+                case DrawRules.LINE2:
+                case DrawRules.LINE7:
+                case DrawRules.LINE8:
+                case DrawRules.LINE13:
+                case DrawRules.LINE21:
+                case DrawRules.CORRIDOR1://Airspace Control Corridors
+                    dc = LINE;
+                    break;
+                case DrawRules.LINE5:
+                case DrawRules.LINE14:
+                case DrawRules.LINE18:
+                    dc = TWOPOINTLINE;
+                    break;    
+                case DrawRules.RECTANGULAR1://requires AM
+                case DrawRules.RECTANGULAR2://requires AM, AM1, AN
+                case DrawRules.RECTANGULAR3://requires AM ?????
+                    dc = TWO_POINT_RECT_PARAMETERED_AUTOSHAPE;
+                    break;
+                case DrawRules.AXIS1:
+                case DrawRules.AXIS2:
+                    dc = ROUTE;
+                    break;                
+                case DrawRules.POINT17://requires AM & AM1
+                    dc = RECTANGULAR_PARAMETERED_AUTOSHAPE;
+                    break;
+                case DrawRules.POINT18://requires AM & AN values
+                case DrawRules.ARC1://requires AM & AN values
+                    dc = SECTOR_PARAMETERED_AUTOSHAPE;
+                    break;
+                case 0://do not draw
+                    dc = DONOTDRAW;
+                break;
+                //Rest are single points
+                default:
+                    dc = POINT;
+            }
+        }
+        else if(symbolSet == SymbolID.SymbolSet_Oceanographic)
+        {
+            switch(drawRule)
+            {
+                case MODrawRules.LINE1:
+                case MODrawRules.LINE2:
+                case MODrawRules.LINE3:
+                case MODrawRules.LINE4:
+                case MODrawRules.LINE6:
+                case MODrawRules.LINE7:
+                case MODrawRules.LINE8:
+                    dc = LINE;
+                    break;
+                case MODrawRules.LINE5:
+                case MODrawRules.AREA1:
+                case MODrawRules.AREA2:
+                    dc = POLYGON;
+                    break;
+                case MODrawRules.POINT5:
+                    dc = SUPERAUTOSHAPE;//Wind Plot???, we didn't draw it before
+                    break;
+                case 0://do not draw
+                    dc = DONOTDRAW;
+                break;
+                //Rest are single points
+                default:
+                    dc = POINT;
+            }
+        }
+        else if(drawRule == 0)
+            dc = DONOTDRAW;
+        else
+            dc = POINT;
+        
+        return dc;
+    }
 
     
 }

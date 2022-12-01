@@ -1,10 +1,7 @@
-/*
- * METEOROLOGICAL AND OCEANOGRAPHIC SYMBOLOGY Draw Rules
- */
 package ArmyC2.C2SD.Plugin2525D;
 
 /**
- *
+ * Draw Rules for METEOROLOGICAL AND OCEANOGRAPHIC SYMBOLOGY
  * @author Michael.Spinelli
  */
 public class MODrawRules {
