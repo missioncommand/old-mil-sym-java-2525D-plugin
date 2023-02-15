@@ -8,17 +8,16 @@ package ArmyC2.C2SD.Plugin2525D;
 import ArmyC2.C2SD.RendererPluginInterface.ISinglePointInfo;
 import ArmyC2.C2SD.RendererPluginInterface.ISinglePointRenderer;
 import ArmyC2.C2SD.Utilities.MilStdAttributes;
-import ArmyC2.C2SD.Utilities.MilStdSymbol;
 import ArmyC2.C2SD.Utilities.ModifiersTG;
 import ArmyC2.C2SD.Utilities.ModifiersUnits;
-import ArmyC2.C2SD.Utilities.SymbolDef;
-import ArmyC2.C2SD.Utilities.SymbolDefTable;
+import ArmyC2.C2SD.Utilities.RendererSettings;
 import ArmyC2.C2SD.Utilities.SymbolUtilities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +41,7 @@ public class SVGTester extends javax.swing.JFrame {
         choice1.add("Airship");
         choice1.add("Law Enforcement");
         choice1.add("Howitzer Heavy");
+        choice1.add("Patrol Boat");
         choice1.add("UXO");
         choice1.add("Action Point");
         choice1.add("Ambush");
@@ -53,6 +53,8 @@ public class SVGTester extends javax.swing.JFrame {
         
         choice1.select(2);
         cbSize.select(3);
+        
+        RendererSettings.getInstance().setTextBackgroundMethod(RendererSettings.TextBackgroundMethod_OUTLINE_QUICK);
     }
 
     /**
@@ -70,6 +72,7 @@ public class SVGTester extends javax.swing.JFrame {
         cbSize = new java.awt.Choice();
         choice1 = new java.awt.Choice();
         cbModifiers = new javax.swing.JCheckBox();
+        btnMeasure = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +106,13 @@ public class SVGTester extends javax.swing.JFrame {
 
         cbModifiers.setText("Modifiers");
 
+        btnMeasure.setText("measure");
+        btnMeasure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMeasureActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,13 +125,14 @@ public class SVGTester extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnDraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cbSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMeasure)))
                     .addComponent(tfSymbolID, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbModifiers)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +149,9 @@ public class SVGTester extends javax.swing.JFrame {
                         .addComponent(btnDraw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(191, 191, 191))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMeasure)
+                        .addGap(156, 156, 156))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -223,8 +236,10 @@ public class SVGTester extends javax.swing.JFrame {
             tfSymbolID.setText("30030100001105000000");
         else if(itemName.equals("Law Enforcement"))//activity
             tfSymbolID.setText("30031000002003000000");
-        else if(itemName.equals("Howitzer Heavy"))//activity
+        else if(itemName.equals("Howitzer Heavy"))//equipment
             tfSymbolID.setText("30031500001109030000");
+        else if(itemName.equals("Patrol Boat"))//sea surface
+            tfSymbolID.setText("30033000001205020000");
         else if(itemName.equals("UXO"))//activity
             tfSymbolID.setText("30033600001200000000");
         else if(itemName.equals("Ambush"))//activity
@@ -242,6 +257,13 @@ public class SVGTester extends javax.swing.JFrame {
         else if(itemName.equals("IED"))//activity
             tfSymbolID.setText("30034000001103000000");
     }//GEN-LAST:event_choice1ItemStateChanged
+
+    private void btnMeasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeasureActionPerformed
+        // TODO add your handling code here:
+        //MeasureSVGs.measureFiles();
+        MeasureSVGs.measureFiles2();
+        JOptionPane.showMessageDialog(rootPane, "Measurements file generated");
+    }//GEN-LAST:event_btnMeasureActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,6 +302,7 @@ public class SVGTester extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnDraw;
+    private javax.swing.JButton btnMeasure;
     private javax.swing.JCheckBox cbModifiers;
     private java.awt.Choice cbSize;
     private java.awt.Choice choice1;

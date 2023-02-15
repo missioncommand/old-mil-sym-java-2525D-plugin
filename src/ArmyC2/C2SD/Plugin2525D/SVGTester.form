@@ -32,6 +32,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnDraw" max="32767" attributes="0"/>
                           <Component id="cbSize" max="32767" attributes="0"/>
+                          <Component id="btnMeasure" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="tfSymbolID" min="-2" pref="158" max="-2" attributes="0"/>
@@ -41,7 +42,7 @@
                       <Component id="cbModifiers" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="113" max="32767" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +62,9 @@
                       <Component id="btnDraw" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbSize" min="-2" pref="28" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnMeasure" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -118,6 +121,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Modifiers"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMeasure">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="measure"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMeasureActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

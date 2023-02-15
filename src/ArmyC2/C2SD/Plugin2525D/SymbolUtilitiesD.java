@@ -44,24 +44,24 @@ public class SymbolUtilitiesD {
         
         switch(modifier)
         {
-            case ModifiersUnitsD.B_ECHELON:
+            case ModifiersD.B_ECHELON:
                 if(ss == 10 || ss == 40)
                 {
                     has = true;
                 }
-            case ModifiersUnitsD.T_UNIQUE_DESIGNATION_1:
+            case ModifiersD.T_UNIQUE_DESIGNATION_1:
                 if((ss > 0 && ss < 21) || (ss > 29 && ss < 41) || (ss > 49 && ss < 55))//All but METOC and CM
                 {
                     has = true;
                 }
                 break;
-            case ModifiersUnitsD.H_ADDITIONAL_INFO_1:
+            case ModifiersD.H_ADDITIONAL_INFO_1:
                 if((ss > 0 && ss < 21) || (ss > 29 && ss < 41) || (ss > 49 && ss < 55))//All but METOC and CM
                 {
                     has = true;
                 }
                 break;
-            case ModifiersUnitsD.G_STAFF_COMMENTS:
+            case ModifiersD.G_STAFF_COMMENTS:
                 if((ss > 0 && ss < 21) || (ss > 29 && ss < 41) || (ss > 49 && ss < 55))//All but METOC and CM
                 {
                     has = true;

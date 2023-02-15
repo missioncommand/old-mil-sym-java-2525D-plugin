@@ -162,7 +162,7 @@ public class SinglePoint2525DRenderer implements ISinglePointRenderer{
                 epath.setAttribute("stroke", AnimationElement.AT_XML, lineColor);
             if(fillColor != null && epath.hasAttribute("fill", AnimationElement.AT_XML))
                 epath.setAttribute("fill", AnimationElement.AT_XML, fillColor);//*/
-            
+                      
             //Set eFrame to epath
             //This is because we only want the core symbol.  
             //None of the modifiers like J,K,X,X that sometimes appears to the 
@@ -409,6 +409,8 @@ public class SinglePoint2525DRenderer implements ISinglePointRenderer{
                 epath.setAttribute("stroke", AnimationElement.AT_XML, lineColor);
             if(fillColor != null && epath.hasAttribute("fill", AnimationElement.AT_XML))
                 epath.setAttribute("fill", AnimationElement.AT_XML, fillColor);//*/
+            
+            
             
             //Set eFrame to epath
             //This is because we only want the core symbol.  

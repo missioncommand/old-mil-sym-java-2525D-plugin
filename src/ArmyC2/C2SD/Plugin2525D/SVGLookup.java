@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -419,8 +420,59 @@ public class SVGLookup {
     
     public static String getFrameID(String symbolID)
     {
+        
         //SIDC positions 3_456_7
         String frameID = symbolID.charAt(2) + "_" + symbolID.substring(3, 6) + "_" + symbolID.charAt(6);
+        
+        /*//for frames with 4 characters (i.e. 0330)
+        String si = symbolID.substring(2, 4);
+        String ss = symbolID.substring(4, 6);
+        int iss = Integer.valueOf(ss);
+        
+        //they didn't make duplicate frame so I have to change the number for 
+        //the lookup to work.
+        switch(iss)
+        {
+            case 01: //Air
+            case 02: //Air Missile
+            case 51: //Air SIGINT
+                ss = "01";
+                break;
+            case 05: //Space
+            case 06: //Space Missile
+            case 50: //Space SIGINT
+                ss = "05";
+                break;
+            case 10: //Land Unit
+            case 11://Land Civilian Unit/Org
+                ss = "10";
+                break;
+            case 15://Land Equipment
+            case 52://Land SigInt
+            case 30://Sea Surface
+            case 53://Sea Surface SIGINT
+                ss = "30";
+                break;
+            case 20: //Land Installation
+                ss = "20";
+                break;
+            case 35: //Sea Subsurface
+            case 36: //Mine Warfare
+            case 54: //Sea Subsurface SigInt
+                ss = "35";
+                break;
+            case 40: //Activities/Events
+                ss = "40";
+                break;
+            case 60: //Cyberspace
+                ss = "40"; //No cyberspace SVG frame at the moment so setting to activities
+                break;
+            default:
+                ss = "00";
+                break;
+        }
+
+        String frameID = si + ss;//*/
         return frameID;
     }
     
@@ -443,5 +495,16 @@ public class SVGLookup {
         //SIDC positions 5-6 + 19-20 + "2"
         String mod2ID = symbolID.substring(4, 6) + symbolID.substring(18, 20) + "2";
         return mod2ID;
+    }
+    
+    public static List<String> getAllKeys()
+    {
+        List<String> kl = new ArrayList();
+        Set<String> keys = _SVGE.keySet();
+        for(String key: keys) {
+            //System.out.println(key);
+            kl.add(key);
+        }
+        return kl;
     }
 }

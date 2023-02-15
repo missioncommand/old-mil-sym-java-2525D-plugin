@@ -430,7 +430,7 @@ public class ModifierRendererD {
             strEchelon = SymbolUtilitiesD.getEchelonText(intEchelon);
         }
         if (strEchelon != null && SymbolUtilitiesD.isInstallation(symbolID) == false
-                && SymbolUtilitiesD.hasModifier(symbolID, ModifiersUnitsD.B_ECHELON))
+                && SymbolUtilitiesD.hasModifier(symbolID, ModifiersD.B_ECHELON))
         {
             
             int echelonOffset = 2,
@@ -739,15 +739,15 @@ public class ModifierRendererD {
         // <editor-fold defaultstate="collapsed" desc="Build DOM Arrow">
         Point2D[] domPoints = null;
         Rectangle2D domBounds = null;
-        if (modifiers.containsKey(ModifiersUnitsD.Q_DIRECTION_OF_MOVEMENT))
+        if (modifiers.containsKey(ModifiersD.Q_DIRECTION_OF_MOVEMENT))
         {
-        	String strQ = modifiers.get(ModifiersUnitsD.Q_DIRECTION_OF_MOVEMENT);
+        	String strQ = modifiers.get(ModifiersD.Q_DIRECTION_OF_MOVEMENT);
         	
         	if(strQ != null && SymbolUtilities.isNumber(strQ))
         	{
 	            float q = Float.valueOf(strQ);
 	
-	            boolean isY = (modifiers.containsKey(ModifiersUnitsD.Y_LOCATION));
+	            boolean isY = (modifiers.containsKey(ModifiersD.Y_LOCATION));
 	
 	            domPoints = createDOMArrowPoints(symbolID, symbolBounds, centerPoint, q, isY,frc);
 	
@@ -2280,7 +2280,7 @@ public class ModifierRendererD {
             {
                 hasModifiers = true;
             }
-            else if(modifiers.containsKey(ModifiersUnitsD.Q_DIRECTION_OF_MOVEMENT) && ss >= 50 && ss <= 54)//has Q and isn't SigInt
+            else if(modifiers.containsKey(ModifiersD.Q_DIRECTION_OF_MOVEMENT) && ss >= 50 && ss <= 54)//has Q and isn't SigInt
             {
                 hasModifiers = true;
             }
