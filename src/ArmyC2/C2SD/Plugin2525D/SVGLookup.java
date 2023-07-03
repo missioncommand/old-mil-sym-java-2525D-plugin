@@ -420,18 +420,28 @@ public class SVGLookup {
     
     public static String getFrameID(String symbolID)
     {
-        
         //SIDC positions 3_456_7
-        String frameID = symbolID.charAt(2) + "_" + symbolID.substring(3, 6) + "_" + symbolID.charAt(6);
-        
-        /*//for frames with 4 characters (i.e. 0330)
-        String si = symbolID.substring(2, 4);
-        String ss = symbolID.substring(4, 6);
-        int iss = Integer.valueOf(ss);
-        
-        //they didn't make duplicate frame so I have to change the number for 
+        // String frameID = symbolID.charAt(2) + "_" + symbolID.substring(3, 6) + "_" + symbolID.charAt(6);
+
+        String frameID = null;
+        String ss;
+        int affiliation = SymbolID.getAffiliation(symbolID);
+        int status = Integer.parseInt(symbolID.substring(6,7));
+        //Some affiliations are always dashed and only have one SVG for status with a value of 0
+        if(affiliation == SymbolID.StandardIdentity_Affiliation_Pending ||
+                affiliation == SymbolID.StandardIdentity_Affiliation_AssumedFriend ||
+                affiliation == SymbolID.StandardIdentity_Affiliation_Suspect_Joker)
+        {
+            //Pending is always dashed and for the "pending" SVG files that value is zero
+            status = 0;
+        }
+        if(status > 1)//0 is solid line, 1 or greater is dashed but we only have 1 svg file for dashed
+            status = 1;
+
+        int context = 0;
+        //they didn't make duplicate frame so I have to change the number for
         //the lookup to work.
-        switch(iss)
+        switch(SymbolID.getSymbolSet(symbolID))
         {
             case 01: //Air
             case 02: //Air Missile
@@ -465,14 +475,24 @@ public class SVGLookup {
                 ss = "40";
                 break;
             case 60: //Cyberspace
-                ss = "40"; //No cyberspace SVG frame at the moment so setting to activities
+                ss = "60"; //No cyberspace SVG frame at the moment so setting to activities
                 break;
             default:
                 ss = "00";
-                break;
+                context = SymbolID.getContext(symbolID);
+
+                if(context == SymbolID.StandardIdentity_Context_Exercise && affiliation > SymbolID.StandardIdentity_Affiliation_Unknown)
+                {
+                    //really there are no unknown exercise symbols outside of pending and unknown
+                    //default to unknown
+                    affiliation = SymbolID.StandardIdentity_Affiliation_Unknown;
+                }
+                frameID = symbolID.charAt(2) + "_" + String.valueOf(affiliation) + ss + "_" + status;
+                return frameID;//*/
         }
 
-        String frameID = si + ss;//*/
+                        //context                   //affiliation
+        frameID = symbolID.charAt(2) + "_" + symbolID.charAt(3) + ss + "_" + status;
         return frameID;
     }
     

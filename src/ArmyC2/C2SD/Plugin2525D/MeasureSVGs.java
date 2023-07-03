@@ -5,8 +5,10 @@
  */
 package ArmyC2.C2SD.Plugin2525D;
 
+import ArmyC2.C2SD.Utilities.ErrorLogger;
 import com.kitfox.svg.Group;
 import com.kitfox.svg.SVGElement;
+import com.kitfox.svg.SVGException;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -136,20 +138,50 @@ public class MeasureSVGs {
             //measure all SVGs in lookup
             for(String key: keyList)
             {
-                temp = SVGLookup.getInstance().getSVGElement(key);
-                if(temp instanceof Group)
+                try
                 {
-                    tg = (Group)temp;
-                    bbox = tg.getBoundingBox();
-                    strSVG = SVG.get(key);
-                    strSVG = strSVG.replace("\n", "");
-                    strSVG = strSVG.replace("\r", "");
-                    strSVG = strSVG.replace("\t", "");
-                    mstring = key + delimiter + String.valueOf(bbox.getX()) + delimiter + String.valueOf(bbox.getY()) + delimiter + String.valueOf(bbox.getWidth()) + delimiter + String.valueOf(bbox.getHeight());// + delimiter + strSVG;
-                    String[] array = {mstring,strSVG};
-                    measurements.add(array);    
-                    //System.out.println(mstring);
-                    //System.out.println(tg.toString());
+                    temp = SVGLookup.getInstance().getSVGElement(key);
+                    if(temp != null && temp instanceof Group)
+                    {
+                        tg = (Group)temp;
+                        try
+                        {
+                            bbox = tg.getBoundingBox();
+                        }
+                        catch(SVGException svge)
+                        {
+                            System.err.println("KitFox ERROR");
+                            System.out.println(key);
+                            System.out.println(svge.getMessage());
+                            ErrorLogger.LogException("MeasureSVGs", "MeasureFiles2", svge);
+                        }
+                        
+                        if(bbox != null)
+                        {
+                            strSVG = SVG.get(key);
+                            strSVG = strSVG.replace("\n", "");
+                            strSVG = strSVG.replace("\r", "");
+                            strSVG = strSVG.replace("\t", "");
+                            mstring = key + delimiter + String.valueOf(bbox.getX()) + delimiter + String.valueOf(bbox.getY()) + delimiter + String.valueOf(bbox.getWidth()) + delimiter + String.valueOf(bbox.getHeight());// + delimiter + strSVG;
+                            String[] array = {mstring,strSVG};
+                            measurements.add(array);    
+                            //System.out.println(mstring);
+                            //System.out.println(tg.toString());
+                        }
+                    }
+                    else if(temp == null)
+                    {
+                        System.out.println("Missing Element: " + key);
+                    }    
+                    temp = null;
+                    bbox = null;
+                }
+                catch(Exception error)
+                {
+                    System.err.println("ERROR");
+                    System.out.println(key);
+                    System.out.println(error.getMessage());
+                    ErrorLogger.LogException("MeasureSVGs", "MeasureFiles2", error);
                 }
                 
             }
