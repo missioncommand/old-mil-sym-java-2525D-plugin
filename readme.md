@@ -1,7 +1,12 @@
 2525D prototype plugin for the SEC renderer. (RETIRED)  
 Modifiers only work for ground units.  
 Cyber Units aren't working properly as there is no cyber frame among the SVGs ESRI developed.  
-No plans to continue this as the renderer and its ports are retired but I didn't want to lose the code so I'm posting it to GitHub.  
+
+New Renderer Work for 2525D/E has been funded.  
+Those projects can be found here:  
+[Java](https://github.com/missioncommand/mil-sym-java)  
+[Android](https://github.com/missioncommand/mil-sym-android)  
+[TypeScript](https://github.com/missioncommand/mil-sym-ts)  ****
 
 Makes use of the SVG files from the ESRI joint-military-symbology-xml project (Apache-2.0 License)
 https://github.com/Esri/joint-military-symbology-xml
